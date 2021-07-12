@@ -3,7 +3,7 @@ on: push
 
 env:
   GODOT_VERSION: 3.2.3
-  EXPORT_NAME: preiwired-sprint-3
+  EXPORT_NAME: rattys run
 
 jobs:
   export-windows:
