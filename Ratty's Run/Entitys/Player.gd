@@ -18,6 +18,7 @@ var mouseDelta : Vector2 = Vector2()
 onready var camera : Camera = get_node("Camera")
 
 func _ready():
+	set_physics_process(false)
 	# hide and lock mouse
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -74,3 +75,7 @@ func _input(event):
 	mouseDelta = Vector2()
 	if event is InputEventMouseMotion:
 		mouseDelta = event.relative
+
+
+func _on_WaitOnSpawnTimer_timeout():
+	set_physics_process(true)

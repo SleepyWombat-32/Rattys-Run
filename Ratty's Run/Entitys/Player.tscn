@@ -14,3 +14,9 @@ shape = SubResource( 1 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00992, -1.00292 )
 far = 2000.0
+
+[node name="WaitOnSpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="WaitOnSpawnTimer" to="." method="_on_WaitOnSpawnTimer_timeout"]
