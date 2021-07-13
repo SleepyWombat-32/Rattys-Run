@@ -11,13 +11,18 @@ func _ready():
 	randomize()
 	noise = OpenSimplexNoise.new()
 	noise.seed = randi()
-	noise.octaves = randi() % 4 + 4
+	noise.octaves = 8
 	noise.period = 120
 	
 	thread = Thread.new()
 	
-
-
+	# Create beacons
+	for i in 10:
+		Globals.beacons_in_world += 1
+		var BEACON = beacon.instance()
+		BEACON.translation.x = randi() % 1000
+		BEACON.translation.z = randi() % 1000
+		add_child(BEACON)
 func add_chunk(x, z):
 	var key = str(x) + "," + str(z)
 	if chunks.has(key) or unready_chunks.has(key):
@@ -48,7 +53,7 @@ func get_chunk(x, z):
 		return chunks.get(key)
 	return null
 
-func _process(delta):
+func _process(_delta):
 	update_chunks()
 	clean_up_chunks()
 	reset_chunks()
@@ -75,11 +80,3 @@ func reset_chunks():
 	for key in chunks:
 		chunks[key].should_remove = true
 
-
-func _on_BeaconSpawnTimer_timeout():
-	Globals.beacons_in_world += 1
-	if Globals.beacons_in_world <= 10:
-		var BEACON = beacon.instance()
-		BEACON.translation.x = randi() % 1000
-		BEACON.translation.z = randi() % 1000
-		add_child(BEACON)

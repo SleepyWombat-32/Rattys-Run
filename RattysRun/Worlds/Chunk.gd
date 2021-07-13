@@ -32,7 +32,7 @@ func generate_chunk():
 	var data_tool = MeshDataTool.new()
 	surface_tool.create_from(plane_mesh, 0)
 	var array_plane = surface_tool.commit()
-	var error = data_tool.create_from_surface(array_plane, 0)
+	var _error = data_tool.create_from_surface(array_plane, 0)
 	
 	for i in range(data_tool.get_vertex_count()):
 		var vertex = data_tool.get_vertex(i)

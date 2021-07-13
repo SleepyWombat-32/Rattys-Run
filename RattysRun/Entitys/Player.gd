@@ -78,4 +78,5 @@ func _input(event):
 
 
 func _on_WaitOnSpawnTimer_timeout():
+	Globals.start_stopwatch(true)
 	set_physics_process(true)
