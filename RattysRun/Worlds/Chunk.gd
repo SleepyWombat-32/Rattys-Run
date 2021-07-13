@@ -16,7 +16,9 @@ func _init(noise, x, z, chunk_size):
 	self.chunk_size = chunk_size
 
 func _ready():
+	generate_water()
 	generate_chunk()
+
 	
 func generate_chunk():
 	var plane_mesh = PlaneMesh.new()
@@ -24,7 +26,7 @@ func generate_chunk():
 	plane_mesh.subdivide_depth = chunk_size * 0.5
 	plane_mesh.subdivide_width = chunk_size * 0.5
 	
-	plane_mesh.material = load("res://Worlds/terrain.material")
+	plane_mesh.material = preload("res://Worlds/terrain.material")
 	
 	var surface_tool = SurfaceTool.new()
 	var data_tool = MeshDataTool.new()
@@ -49,5 +51,13 @@ func generate_chunk():
 	mesh_instance = MeshInstance.new()
 	mesh_instance.mesh = surface_tool.commit()
 	mesh_instance.create_trimesh_collision()
-	mesh_instance.cast_shadow = GeometryInstance.SHADOW_CASTING_SETTING_OFF
+	mesh_instance.cast_shadow = GeometryInstance.SHADOW_CASTING_SETTING_ON
+	add_child(mesh_instance)
+
+func generate_water():
+	var plane_mesh = PlaneMesh.new()
+	plane_mesh.size = Vector2(chunk_size, chunk_size)
+	plane_mesh.material = preload("res://Worlds/water.material")
+	mesh_instance = MeshInstance.new()
+	mesh_instance.mesh = plane_mesh
 	add_child(mesh_instance)

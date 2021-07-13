@@ -6,16 +6,17 @@ var noise
 var chunks = {}
 var unready_chunks = {}
 var thread
-
-
+onready var beacon = preload("res://Beacon.tscn")
 func _ready():
 	randomize()
 	noise = OpenSimplexNoise.new()
 	noise.seed = randi()
-	noise.octaves = 6
-	noise.period = 80
+	noise.octaves = randi() % 4 + 4
+	noise.period = 120
 	
 	thread = Thread.new()
+	
+
 
 func add_chunk(x, z):
 	var key = str(x) + "," + str(z)
@@ -51,11 +52,12 @@ func _process(delta):
 	update_chunks()
 	clean_up_chunks()
 	reset_chunks()
+
 func update_chunks():
 	var player_translation = $Player.translation
 	var p_x = int(player_translation.x) / chunk_size
 	var p_z = int(player_translation.z) / chunk_size
-	
+
 	for x in range(p_x - chunk_amount * 0.5, p_x + chunk_amount * 0.5):
 		for z in range(p_z - chunk_amount * 0.5, p_z + chunk_amount * 0.5):
 			add_chunk(x, z)
@@ -69,6 +71,15 @@ func clean_up_chunks():
 			chunk.queue_free()
 			chunks.erase(key)
 func reset_chunks():
-	
+
 	for key in chunks:
 		chunks[key].should_remove = true
+
+
+func _on_BeaconSpawnTimer_timeout():
+	Globals.beacons_in_world += 1
+	if Globals.beacons_in_world <= 10:
+		var BEACON = beacon.instance()
+		BEACON.translation.x = randi() % 1000
+		BEACON.translation.z = randi() % 1000
+		add_child(BEACON)

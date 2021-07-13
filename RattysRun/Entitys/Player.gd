@@ -2,9 +2,9 @@ extends KinematicBody
 # The player
 
 # physics
-var moveSpeed : float = 12.0
+var moveSpeed : float = 32.0
 var jumpForce : float = 12.0
-var gravity : float = 18.0
+var gravity : float = 40.0
 
 # cam look
 var minLookAngle : float = -85.0
