@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Entitys/Player.gd" type="Script" id=1]
+[ext_resource path="res://GUI/GUI.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -18,5 +19,9 @@ far = 2000.0
 [node name="WaitTimer" type="Timer" parent="."]
 wait_time = 10.0
 autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" parent="CanvasLayer" instance=ExtResource( 2 )]
 
 [connection signal="timeout" from="WaitTimer" to="." method="_on_WaitOnSpawnTimer_timeout"]

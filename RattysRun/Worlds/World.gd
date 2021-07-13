@@ -17,7 +17,7 @@ func _ready():
 	thread = Thread.new()
 	
 	# Create beacons
-	for i in 10:
+	for i in Globals.beacons_to_spawn:
 		Globals.beacons_in_world += 1
 		var BEACON = beacon.instance()
 		BEACON.translation.x = randi() % 1000
