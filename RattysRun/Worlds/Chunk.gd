@@ -8,6 +8,8 @@ var x
 var z
 var chunk_size
 var should_remove = true
+var tree = preload("res://Worlds/Tree.tscn")
+
 
 func _init(noise, x, z, chunk_size):
 	self.noise = noise
@@ -38,6 +40,12 @@ func generate_chunk():
 		var vertex = data_tool.get_vertex(i)
 		vertex.y = noise.get_noise_3d(vertex.x + x, vertex.y, vertex.z + z) * 80
 		data_tool.set_vertex(i, vertex)
+		if vertex.y >= 6:
+			var rand = randi() % 1000
+			if rand == 1:
+				var TREE = tree.instance()
+				TREE.translation = Vector3(vertex.x, vertex.y, vertex.z)
+				add_child(TREE)
 
 	for s in range(array_plane.get_surface_count()):
 		array_plane.surface_remove(s)

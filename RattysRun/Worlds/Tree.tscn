@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Worlds/Assets/FirstTree.obj" type="ArrayMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+params_diffuse_mode = 4
+albedo_color = Color( 0.352941, 0.254902, 0.254902, 1 )
+metallic = 1.0
+roughness = 0.77
+
+[sub_resource type="SpatialMaterial" id=2]
+params_diffuse_mode = 4
+albedo_color = Color( 0.466667, 0.952941, 0.435294, 1 )
+
+[sub_resource type="CylinderShape" id=3]
+height = 20.0
+
+[node name="Tree" type="MeshInstance"]
+mesh = ExtResource( 1 )
+material/0 = SubResource( 1 )
+material/1 = SubResource( 2 )
+material/2 = SubResource( 2 )
+material/3 = SubResource( 2 )
+material/4 = SubResource( 2 )
+material/5 = SubResource( 2 )
+material/6 = SubResource( 2 )
+material/7 = SubResource( 2 )
+material/8 = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.94998, 0 )
+shape = SubResource( 3 )

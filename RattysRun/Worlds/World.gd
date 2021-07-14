@@ -11,7 +11,7 @@ func _ready():
 	randomize()
 	noise = OpenSimplexNoise.new()
 	noise.seed = randi()
-	noise.octaves = 8
+	noise.octaves = 8 # Sea level is 0, high mountain is about 36
 	noise.period = 120
 	
 	thread = Thread.new()

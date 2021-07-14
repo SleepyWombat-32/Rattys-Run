@@ -23,7 +23,6 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
-
 	# reset x and z vel
 	vel.x = 0
 	vel.z = 0
